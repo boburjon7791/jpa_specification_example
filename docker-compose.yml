@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    restart: always
+    image: postgres:15
+    container_name: jpa_specification_postgres_db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: jpa_specification
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_jpa_specification:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  app:
+    restart: always
+    image: bobur7761/jpa_specification_:latest
+    container_name: jpa_specification_-container
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/jpa_specification
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: 123
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  postgres_data_jpa_specification:
+
+networks:
+  app-network:
