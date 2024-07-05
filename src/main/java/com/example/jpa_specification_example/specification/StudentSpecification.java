@@ -11,7 +11,7 @@ import jakarta.persistence.criteria.Join;
 
 public class StudentSpecification {
     public static Specification<Student> fullNameContains(String name){
-        return (root, query, builder) -> builder.like(root.get(Student._fullName), name.toLowerCase());
+        return (root, query, builder) -> builder.like(builder.lower(root.get(Student._fullName)), "%"+name.toLowerCase()+"%");
     }
     public static Specification<Student> rateFrom(Integer rate){
         return (root, query, builder) -> builder.greaterThanOrEqualTo(root.get(Student._rate), rate);

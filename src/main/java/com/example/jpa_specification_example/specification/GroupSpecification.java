@@ -9,7 +9,7 @@ import com.example.jpa_specification_example.model.entity.Group;
 public class GroupSpecification {
     public static Specification<Group> nameContains(String name){
         return (root, criteria, builder) -> {
-            return builder.like(root.get(Group._name), name.toLowerCase());
+            return builder.like(builder.lower(root.get(Group._name)), "%"+name.toLowerCase()+"%");
         };
     }
 
