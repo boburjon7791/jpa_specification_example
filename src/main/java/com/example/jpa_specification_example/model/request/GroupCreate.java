@@ -11,6 +11,6 @@ public record GroupCreate(
         Integer rate
 ) {
     public Group toEntity(){
-        return new Group(name,rate);
+        return new Group(name.toUpperCase(), rate);
     }
 }

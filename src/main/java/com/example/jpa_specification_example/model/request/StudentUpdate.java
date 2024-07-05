@@ -10,7 +10,7 @@ public record StudentUpdate(
         Integer rate
 ) {
     public Student toEntity(Group group){
-        Student student = new Student(fullName, group, rate);
+        Student student = new Student(fullName.toLowerCase(), group, rate);
         student.setId(id);
         return student;
     }

@@ -1,6 +1,7 @@
 package com.example.jpa_specification_example.model.response;
 
 import com.example.jpa_specification_example.model.entity.Group;
+import com.example.jpa_specification_example.utils.Utils;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ public record GroupResponse(
         return new GroupResponse(
                 entity.getId(),
                 entity.getCreatedAt(),
-                entity.getName(),
+                Utils.firstUpperCase(entity.getName()),
                 entity.getRate()
         );
     }

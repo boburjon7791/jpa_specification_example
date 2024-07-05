@@ -12,7 +12,7 @@ public record GroupUpdate(
         Integer rate
 ) {
     public Group toEntity(){
-        Group group = new Group(name, rate);
+        Group group = new Group(name.toLowerCase(), rate);
         group.setId(id);
         return group;
     }

@@ -32,4 +32,13 @@ public class Student extends BaseEntity{
 
     @Column(nullable = false)
     private Integer rate;
+
+    /**
+     * for specifications
+     */
+    public static String _createdAt="createdAt";
+    public static String _fullName="fullName";
+    public static String _groupId="groupId";
+    public static String _rate="rate";
+    
 }

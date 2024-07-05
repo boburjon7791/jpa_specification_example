@@ -20,6 +20,6 @@ public record StudentCreate(
         Integer rate
 ) {
     public Student toEntity(Group group){
-        return new Student(fullName, group, rate);
+        return new Student(fullName.toLowerCase(), group, rate);
     }
 }
