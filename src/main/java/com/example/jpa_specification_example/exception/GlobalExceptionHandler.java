@@ -43,6 +43,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public Header<?> handleApiException(ApiException e) {
         log.error("handle api exception: {0}", e);
-        return Header.error(e.getMessage(), ResponseCodes.BAD_REQUEST);
+        return Header.error(e.getMessage(), e.getResponseCode());
     }
 }
