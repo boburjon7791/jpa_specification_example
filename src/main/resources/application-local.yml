@@ -1,6 +1,13 @@
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/jpa_specification
-        password: 123
-        username: myuser
+        password: 1313
+        username: postgres
         driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                format_sql: true
+                show_sql: true

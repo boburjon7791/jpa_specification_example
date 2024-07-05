@@ -18,7 +18,7 @@ services:
 
   app:
     restart: always
-    image: bobur7761/jpa_specification_:latest
+    image: bobur7761/jpa_specification:latest
     container_name: jpa_specification_-container
     ports:
       - "8080:8080"
