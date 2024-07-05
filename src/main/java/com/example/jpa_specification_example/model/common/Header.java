@@ -8,8 +8,9 @@ import jakarta.validation.constraints.NotNull;
 
 @ToString
 @Builder(access = AccessLevel.PRIVATE)
-@Setter(AccessLevel.PRIVATE)
+@Setter
 @NoArgsConstructor
+@Getter
 @AllArgsConstructor
 public class Header<T> {
     @NotNull
@@ -34,6 +35,17 @@ public class Header<T> {
                 .build();
     }
 
+    public static <T> Header<T> ok(T data, PaginationData pagination){
+        return Header.<T>builder()
+                .data(data)
+                .transactionTime(LocalDateTime.now())
+                .responseMsg("OK")
+                .pagination(pagination)
+                .responseCode(ResponseCodes.OK)
+                .build();
+    }
+    
+
     /**
     * ERROR responses
     * */
@@ -45,20 +57,19 @@ public class Header<T> {
                 .build();
     }
 
-    /**
-     * instance methods
-    * */
-    public Header<T> message(String message){
-        this.setResponseMsg(message);
-        return this;
-    }
-    public Header<T> responseCode(String responseCodes){
-        this.setResponseCode(responseCodes);
-        return this;
-    }
-    public Header<T> pagination(PaginationData pagination){
-        this.setPagination(pagination);
-        return this;
+    public static <T> Header<T> error(String message){
+        return Header.<T>builder()
+                .transactionTime(LocalDateTime.now())
+                .responseMsg(message)
+                .responseCode(ResponseCodes.SERVER_ERROR)
+                .build();
     }
 
+    public static <T> Header<T> error(String message, String responseCode){
+        return Header.<T>builder()
+                .transactionTime(LocalDateTime.now())
+                .responseMsg(message)
+                .responseCode(responseCode)
+                .build();
+    }
 }

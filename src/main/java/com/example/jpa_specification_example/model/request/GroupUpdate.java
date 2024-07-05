@@ -17,9 +17,9 @@ public record GroupUpdate(
         @PositiveOrZero
         Integer rate
 ) {
-    public Group toEntity(){
-        Group group = new Group(name.toLowerCase(), rate);
-        group.setId(id);
+    public Group toEntity(Group group){
+        group.setName(name);
+        group.setRate(rate);
         return group;
     }
 }

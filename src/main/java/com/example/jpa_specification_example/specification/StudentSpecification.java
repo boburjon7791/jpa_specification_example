@@ -1,9 +1,8 @@
 package com.example.jpa_specification_example.specification;
 
-import org.springframework.data.jpa.domain.Specification;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import org.springframework.data.jpa.domain.Specification;
 
 import com.example.jpa_specification_example.model.entity.Group;
 import com.example.jpa_specification_example.model.entity.Student;
@@ -11,7 +10,7 @@ import com.example.jpa_specification_example.model.entity.Student;
 import jakarta.persistence.criteria.Join;
 
 public class StudentSpecification {
-    public static Specification<Student> nameEquals(String name){
+    public static Specification<Student> fullNameContains(String name){
         return (root, query, builder) -> builder.like(root.get(Student._fullName), name.toLowerCase());
     }
     public static Specification<Student> rateFrom(Integer rate){
@@ -26,7 +25,7 @@ public class StudentSpecification {
     public static Specification<Student> createdAtTo(LocalDate createdAt){
         return (root, query, builder) -> builder.greaterThanOrEqualTo(root.get(Student._createdAt), createdAt.atTime(23,59));
     }
-    public static Specification<Student> groupEquals(Long groupId){
+    public static Specification<Student> groupId(Long groupId){
         return (root, query, builder) -> {
             Join<Student,Group> groupJoin = root.join("group");
             return builder.equal(groupJoin.get("id"), groupId);

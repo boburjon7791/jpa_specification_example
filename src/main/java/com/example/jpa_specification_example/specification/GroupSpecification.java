@@ -1,8 +1,9 @@
 package com.example.jpa_specification_example.specification;
 
-import org.springframework.data.jpa.domain.Specification;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+
+import org.springframework.data.jpa.domain.Specification;
+
 import com.example.jpa_specification_example.model.entity.Group;
 
 public class GroupSpecification {

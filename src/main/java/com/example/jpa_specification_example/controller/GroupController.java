@@ -26,11 +26,11 @@ public class GroupController {
     private final GroupService groupService;
     @PostMapping
     public Header<?> save(@RequestBody @Valid Header<GroupCreate> request){
-        return Header.ok(groupService.save(request.getData())).message("Group created successfully");
+        return Header.ok(groupService.save(request.getData()));
     }
     @PutMapping
     public Header<?> update(@RequestBody @Valid Header<GroupUpdate> request){
-        return Header.ok(groupService.update(request.getData())).message("Group updated successfully");
+        return Header.ok(groupService.update(request.getData()));
     }
     @GetMapping("/{id}")
     public Header<?> getById(@PathVariable Long id){
@@ -43,6 +43,6 @@ public class GroupController {
     @DeleteMapping("/{id}")
     public Header<?> deleteById(@PathVariable Long id){
         groupService.deleteById(id);
-        return Header.ok().message("Group deleted successfully");
+        return Header.ok();
     }
 }

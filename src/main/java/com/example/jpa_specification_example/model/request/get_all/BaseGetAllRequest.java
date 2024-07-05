@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort.Order;
 
 public class BaseGetAllRequest {
     public int page;
-    public int size;
+    public int size=10;
     public String name;
     public Integer rateFrom;
     public Integer rateTo;

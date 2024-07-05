@@ -10,9 +10,9 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: jpa_specification
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - postgres_data_jpa_specification:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
 
@@ -32,7 +32,7 @@ services:
       - app-network
 
 volumes:
-  postgres_data_jpa_specification:
+  postgres_data:
 
 networks:
   app-network:

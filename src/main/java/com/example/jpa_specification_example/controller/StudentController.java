@@ -26,16 +26,16 @@ public class StudentController {
     private final StudentService studentService;
     @PostMapping
     public Header<?> save(@RequestBody @Valid Header<StudentCreate> request){
-        return Header.ok(studentService.save(request.getData())).message("Student created successfully");
+        return Header.ok(studentService.save(request.getData()));
     }
     @PutMapping
     public Header<?> update(@RequestBody @Valid Header<StudentUpdate> request){
-        return Header.ok(studentService.update(request.getData())).message("Student updated successfully");
+        return Header.ok(studentService.update(request.getData()));
     }
     @DeleteMapping("/{id}")
     public Header<?> deleteById(@PathVariable Long id){
         studentService.deleteById(id);
-        return Header.ok().message("Student deleted successfully");
+        return Header.ok();
     }
     @GetMapping("/{id}")
     public Header<?> findById(@PathVariable Long id){

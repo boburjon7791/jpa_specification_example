@@ -22,26 +22,27 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Header<?> handleException(Exception e) {
         log.error("handled exception: {0}", e);
-        return Header.error().message(e.toString());
+        return Header.error(e.toString(), ResponseCodes.SERVER_ERROR);
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Header<?> handleNoResourceFoundException(NoResourceFoundException e) {
         log.error("handle no resource found exception: {0}", e);
-        return Header.error().message(e.toString()).responseCode(ResponseCodes.NOT_FOUND);
+        return Header.error(e.toString(), ResponseCodes.NOT_FOUND);
     }
 
-    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
     public Header<?> handleBindException(Exception e) {
         log.error("handle bind exception: {0}", e);
-        return Header.error().message(e.toString()).responseCode(ResponseCodes.BAD_REQUEST);
+        return Header.error(e.toString(), ResponseCodes.BAD_REQUEST);
     }
 
     @ExceptionHandler(ApiException.class)
-    public ResponseEntity<Header<?>> handleApiException(ApiException e) {
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Header<?> handleApiException(ApiException e) {
         log.error("handle api exception: {0}", e);
-        return new ResponseEntity<>(Header.error().message(e.toString()).responseCode(ResponseCodes.BAD_REQUEST), e.getStatus());
+        return Header.error(e.getMessage(), ResponseCodes.BAD_REQUEST);
     }
 }

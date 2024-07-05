@@ -5,6 +5,6 @@ public interface Utils {
     static String firstUpperCase(String title){
         StringBuilder first=new StringBuilder(Character.toUpperCase(title.charAt(0)));
         StringBuilder second = new StringBuilder(title.substring(1));
-        return first.append(second).toString();
+        return title;
     }
 }
