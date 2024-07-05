@@ -4,12 +4,15 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotNull;
+
 @ToString
 @Builder(access = AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Header<T> {
+    @NotNull
     private LocalDateTime transactionTime;
     private String responseMsg;
     private String responseCode;

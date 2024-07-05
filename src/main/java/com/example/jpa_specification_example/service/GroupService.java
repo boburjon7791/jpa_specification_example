@@ -41,7 +41,7 @@ public class GroupService {
     public void deleteById(Long id){
         groupRepository.deleteById(id);
     }
-    public Header<?> getAll(GroupGet request){
+    public Header<?> findAll(GroupGet request){
         Sort sort=Sort.by(request.getSorts());
         Specification<Group> specification=GroupSpecification.rateFrom(request.rateFrom)
                                                             .and(GroupSpecification.rateTo(request.rateTo))

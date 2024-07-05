@@ -17,7 +17,6 @@ import com.example.jpa_specification_example.model.request.get_all.StudentGet;
 import com.example.jpa_specification_example.model.response.StudentResponse;
 import com.example.jpa_specification_example.repository.GroupRepository;
 import com.example.jpa_specification_example.repository.StudentRepository;
-import com.example.jpa_specification_example.specification.GroupSpecification;
 import com.example.jpa_specification_example.specification.StudentSpecification;
 
 import lombok.RequiredArgsConstructor;
