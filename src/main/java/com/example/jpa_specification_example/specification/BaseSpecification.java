@@ -7,7 +7,25 @@ import org.springframework.data.jpa.domain.Specification;
 import com.example.jpa_specification_example.model.entity.BaseEntity;
 import com.example.jpa_specification_example.model.request.get_all.BaseGetAllRequest;
 
-public class BaseSpecification<T> {
+public abstract class BaseSpecification<T> {
+    public static <T> Specification<T> createBaseSpecification(BaseGetAllRequest request){
+        Specification<T> specification = Specification.where(null);
+        
+        if(request.rateFrom!=null){
+            specification=specification.and(BaseSpecification.rateFrom(request.rateFrom));
+        }
+        if(request.rateTo!=null){
+            specification=specification.and(BaseSpecification.rateTo(request.rateTo));
+        }
+        if(request.from!=null){
+            specification=specification.and(BaseSpecification.createdAtFrom(request.from));
+        }
+        if(request.to!=null){
+            specification=specification.and(BaseSpecification.createdAtTo(request.to));
+        }
+        
+        return specification;
+    }
     private static <T> Specification<T> rateFrom(Integer rate){
         return (root, criteria, builder) -> {
             return builder.greaterThanOrEqualTo(root.get(BaseEntity._rate), rate);
@@ -28,23 +46,5 @@ public class BaseSpecification<T> {
         return (root, criteria, builder) -> {
             return builder.greaterThanOrEqualTo(root.get(BaseEntity._createdAt), createdAt.atTime(23,59));
         };
-    }
-    public static <T> Specification<T> createBaseSpecification(BaseGetAllRequest request){
-        Specification<T> specification = Specification.where(null);
-        
-        if(request.rateFrom!=null){
-            specification=specification.and(BaseSpecification.rateFrom(request.rateFrom));
-        }
-        if(request.rateTo!=null){
-            specification=specification.and(BaseSpecification.rateTo(request.rateTo));
-        }
-        if(request.from!=null){
-            specification=specification.and(BaseSpecification.createdAtFrom(request.from));
-        }
-        if(request.to!=null){
-            specification=specification.and(BaseSpecification.createdAtTo(request.to));
-        }
-        
-        return specification;
     }
 }
