@@ -19,8 +19,11 @@ import com.example.jpa_specification_example.model.request.get_all.StudentGet;
 import com.example.jpa_specification_example.model.response.StudentResponse;
 import com.example.jpa_specification_example.repository.GroupRepository;
 import com.example.jpa_specification_example.repository.StudentRepository;
+import com.example.jpa_specification_example.specification.BaseSpecification;
 import com.example.jpa_specification_example.specification.StudentSpecification;
+import com.example.jpa_specification_example.utils.Utils;
 
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -47,33 +50,18 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
     public Header<?> getAll(StudentGet request){
-        Sort sort=Sort.by(request.getSorts());
-        Specification<Student> specification = Specification.where(null);
-        if(request.groupId!=null){
-            specification=specification.and(StudentSpecification.groupId(request.groupId));
-        }
-        if(request.rateFrom!=null){
-            specification=specification.and(StudentSpecification.rateFrom(request.rateFrom));
-        }
-        if(request.rateTo!=null){
-            specification=specification.and(StudentSpecification.rateTo(request.rateTo));
-        }
-        if(request.from!=null){
-            specification=specification.and(StudentSpecification.createdAtFrom(request.from));
-        }
-        if(request.to!=null){
-            specification=specification.and(StudentSpecification.createdAtTo(request.to));
-        }
-        if(request.name!=null){
-            specification=specification.and(StudentSpecification.fullNameContains(request.name));
-        }
+        Sort sort=Utils.sortById();
+        
+        Specification<Student> baseSpecification = BaseSpecification.createBaseSpecification(request);
+        baseSpecification=baseSpecification.and(StudentSpecification.concatWithBaseSpecification(baseSpecification, request));
 
         if(request.all){
-            return Header.ok(studentRepository.findAll(specification, sort).stream()
+            return Header.ok(studentRepository.findAll(baseSpecification, sort).stream()
                     .map(StudentResponse::fromEntity)
                     .collect(Collectors.toList()));
         }
-        Page<?> page=studentRepository.findAll(specification, request.pageable())
+        
+        Page<?> page=studentRepository.findAll(baseSpecification, request.pageable())
                                         .map(StudentResponse::fromEntity);
         return Header.ok(page.getContent(), PaginationData.of(page));
     }
