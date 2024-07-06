@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import com.example.jpa_specification_example.model.entity.BaseEntity;
 import com.example.jpa_specification_example.model.request.get_all.BaseGetAllRequest;
 
-public abstract class BaseSpecification<T> {
+public class BaseSpecification<T> {
     public static <T> Specification<T> createBaseSpecification(BaseGetAllRequest request, Class<T> returnType) {
         Specification<T> specification = Specification.where(null);
         
