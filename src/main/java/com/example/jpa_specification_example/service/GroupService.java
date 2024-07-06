@@ -52,7 +52,7 @@ public class GroupService {
     public Header<?> findAll(GroupGet request){
         Sort sort=Utils.sortById();
         
-        Specification<Group> baseSpecification=BaseSpecification.createBaseSpecification(request);
+        Specification<Group> baseSpecification=BaseSpecification.createBaseSpecification(request, Group.class);
         baseSpecification=GroupSpecification.concatWithBaseSpecification(baseSpecification, request);
 
         if(request.all){

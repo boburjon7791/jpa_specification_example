@@ -8,7 +8,7 @@ import com.example.jpa_specification_example.model.entity.BaseEntity;
 import com.example.jpa_specification_example.model.request.get_all.BaseGetAllRequest;
 
 public abstract class BaseSpecification<T> {
-    public static <T> Specification<T> createBaseSpecification(BaseGetAllRequest request){
+    public static <T> Specification<T> createBaseSpecification(BaseGetAllRequest request, Class<T> returnType) {
         Specification<T> specification = Specification.where(null);
         
         if(request.rateFrom!=null){
@@ -23,7 +23,6 @@ public abstract class BaseSpecification<T> {
         if(request.to!=null){
             specification=specification.and(BaseSpecification.createdAtTo(request.to));
         }
-        
         return specification;
     }
     private static <T> Specification<T> rateFrom(Integer rate){

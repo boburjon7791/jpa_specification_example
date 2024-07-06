@@ -52,7 +52,7 @@ public class StudentService {
     public Header<?> getAll(StudentGet request){
         Sort sort=Utils.sortById();
         
-        Specification<Student> baseSpecification = BaseSpecification.createBaseSpecification(request);
+        Specification<Student> baseSpecification = BaseSpecification.createBaseSpecification(request, Student.class);
         baseSpecification=StudentSpecification.concatWithBaseSpecification(baseSpecification, request);
 
         if(request.all){
