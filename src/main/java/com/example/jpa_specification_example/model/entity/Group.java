@@ -36,6 +36,4 @@ public class Group extends BaseEntity{
      * for specifications
      */
     public static String _name="name";
-    public static String _rate="rate";
-    public static String _createdAt="createdAt";
 }

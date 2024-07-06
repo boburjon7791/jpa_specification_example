@@ -22,10 +22,10 @@ public class StudentSpecification{
     }
     public static Specification<Student> concatWithBaseSpecification(Specification<Student> baseSpecification, StudentGet request){
         if(request.groupId!=null){
-            baseSpecification=baseSpecification.or(StudentSpecification.groupId(request.groupId));
+            baseSpecification=baseSpecification.and(StudentSpecification.groupId(request.groupId));
         }
         if(request.search!=null){
-            baseSpecification=baseSpecification.or(StudentSpecification.fullName(request.search));
+            baseSpecification=baseSpecification.and(StudentSpecification.fullName(request.search));
         }
         return baseSpecification;
     }

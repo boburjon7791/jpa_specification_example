@@ -53,13 +53,14 @@ public class GroupService {
         Sort sort=Utils.sortById();
         
         Specification<Group> baseSpecification=BaseSpecification.createBaseSpecification(request);
+        baseSpecification=GroupSpecification.concatWithBaseSpecification(baseSpecification, request);
 
         if(request.all){
             return Header.ok(groupRepository.findAll(baseSpecification, sort).stream()
                     .map(GroupResponse::fromEntity)
                     .collect(Collectors.toList()));
         }
-        
+
         Page<?> page= groupRepository.findAll(baseSpecification, request.pageable())
                                         .map(GroupResponse::fromEntity);
         return Header.ok(page.getContent(), PaginationData.of(page));

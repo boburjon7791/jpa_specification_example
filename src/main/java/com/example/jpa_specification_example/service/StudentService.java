@@ -53,14 +53,14 @@ public class StudentService {
         Sort sort=Utils.sortById();
         
         Specification<Student> baseSpecification = BaseSpecification.createBaseSpecification(request);
-        baseSpecification=baseSpecification.and(StudentSpecification.concatWithBaseSpecification(baseSpecification, request));
+        baseSpecification=StudentSpecification.concatWithBaseSpecification(baseSpecification, request);
 
         if(request.all){
             return Header.ok(studentRepository.findAll(baseSpecification, sort).stream()
                     .map(StudentResponse::fromEntity)
                     .collect(Collectors.toList()));
         }
-        
+
         Page<?> page=studentRepository.findAll(baseSpecification, request.pageable())
                                         .map(StudentResponse::fromEntity);
         return Header.ok(page.getContent(), PaginationData.of(page));
