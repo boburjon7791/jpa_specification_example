@@ -11,8 +11,8 @@ import jakarta.persistence.criteria.Join;
 public class StudentSpecification{
     private static Specification<Student> groupId(Long groupId){
         return (root, query, builder) -> {
-            Join<Student,Group> groupJoin = root.join("group");
-            return builder.equal(groupJoin.get("id"), groupId);
+            Join<Student,Group> groupJoin = root.join(Student._group);
+            return builder.equal(groupJoin.get(Group._id), groupId);
         };
     }
     private static Specification<Student> fullName(String fullName){

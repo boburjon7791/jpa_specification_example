@@ -40,5 +40,6 @@ public class Student extends BaseEntity{
     public static String _fullName="fullName";
     public static String _groupId="groupId";
     public static String _rate="rate";
+    public static String _group="group";
     
 }
