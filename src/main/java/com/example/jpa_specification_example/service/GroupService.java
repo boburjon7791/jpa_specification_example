@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.example.jpa_specification_example.model.request.GroupUpdate;
 import com.example.jpa_specification_example.model.request.get_all.GroupGet;
 import com.example.jpa_specification_example.model.response.GroupResponse;
 import com.example.jpa_specification_example.repository.GroupRepository;
+import com.example.jpa_specification_example.specification.BaseSpecification;
 import com.example.jpa_specification_example.specification.GroupSpecification;
 import com.example.jpa_specification_example.utils.Utils;
 
@@ -53,7 +55,7 @@ public class GroupService {
         Specification<Group> specification=GroupSpecification.createSpecification(request);
 
         if(request.all){
-            return Header.ok(groupRepository.findAll(specification, sort).stream()
+            return Header.ok(groupRepository.findAll(baseSpecification, sort).stream()
                     .map(GroupResponse::fromEntity)
                     .collect(Collectors.toList()));
         }

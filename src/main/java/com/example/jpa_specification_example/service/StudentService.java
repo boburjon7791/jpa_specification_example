@@ -19,9 +19,11 @@ import com.example.jpa_specification_example.model.request.get_all.StudentGet;
 import com.example.jpa_specification_example.model.response.StudentResponse;
 import com.example.jpa_specification_example.repository.GroupRepository;
 import com.example.jpa_specification_example.repository.StudentRepository;
+import com.example.jpa_specification_example.specification.BaseSpecification;
 import com.example.jpa_specification_example.specification.StudentSpecification;
 import com.example.jpa_specification_example.utils.Utils;
 
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -50,15 +52,25 @@ public class StudentService {
     public Header<?> getAll(StudentGet request){
         Sort sort=Utils.sortById();
         
+<<<<<<< HEAD
         Specification<Student> specification = StudentSpecification.createSpecification(request);
         
+=======
+        Specification<Student> baseSpecification = BaseSpecification.createBaseSpecification(request, Student.class);
+        baseSpecification=StudentSpecification.concatWithBaseSpecification(baseSpecification, request);
+
+>>>>>>> 56a589a41be0159aa4fc1ec363edac72f8f842cc
         if(request.all){
-            return Header.ok(studentRepository.findAll(specification, sort).stream()
+            return Header.ok(studentRepository.findAll(baseSpecification, sort).stream()
                     .map(StudentResponse::fromEntity)
                     .collect(Collectors.toList()));
         }
 
+<<<<<<< HEAD
         Page<?> page=studentRepository.findAll(specification, request.pageable())
+=======
+        Page<?> page=studentRepository.findAll(baseSpecification, request.pageable())
+>>>>>>> 56a589a41be0159aa4fc1ec363edac72f8f842cc
                                         .map(StudentResponse::fromEntity);
         return Header.ok(page.getContent(), PaginationData.of(page));
     }
