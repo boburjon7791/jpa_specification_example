@@ -19,10 +19,10 @@ public class StudentSpecification{
         if(request.search!=null){
             specification=specification.and(fullName(request.search));
         }
-        if(request.rateFrom!=null){
+        if(request.from!=null){
             specification=specification.and(fromDate(request.from));
         }
-        if(request.rateTo!=null){
+        if(request.to!=null){
             specification=specification.and(toDate(request.to));
         }
         if(request.rateFrom!=null){
