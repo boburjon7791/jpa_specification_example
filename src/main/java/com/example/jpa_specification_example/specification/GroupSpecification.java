@@ -32,12 +32,12 @@ public class GroupSpecification{
     }
     private static Specification<Group> fromDate(LocalDate createdAt){
         return (root, query, builder) -> {
-            return builder.greaterThanOrEqualTo(root.get(Group._createdAt), createdAt);
+            return builder.greaterThanOrEqualTo(root.get(Group._createdAt), createdAt.atTime(0,0));
         };
     }
     private static Specification<Group> toDate(LocalDate createdAt){
         return (root, query, builder) -> {
-            return builder.lessThanOrEqualTo(root.get(Group._createdAt), createdAt);
+            return builder.lessThanOrEqualTo(root.get(Group._createdAt), createdAt.atTime(23,59));
         };
     }
     private static Specification<Group> fromRate(Integer rate){
