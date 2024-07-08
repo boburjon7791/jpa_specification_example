@@ -35,7 +35,10 @@ public class BaseEntity {
     public static String _rate="rate";
     public static String _createdAt="createdAt";
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static String _id="id";
+=======
+>>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
 =======
 >>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
 }

@@ -40,8 +40,11 @@ public class Group extends BaseEntity{
 
     public static String _id="id";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public static String _group="group";
+=======
+>>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
 =======
 >>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
 }

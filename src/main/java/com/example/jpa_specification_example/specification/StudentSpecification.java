@@ -20,6 +20,9 @@ public class StudentSpecification{
         return (root, query, builder) -> {
             Join<Student,Group> groupJoin = root.join(Student._group);
             return builder.equal(groupJoin.get(Group._id), groupId);
+<<<<<<< HEAD
+>>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
+=======
 >>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
         };
     }
