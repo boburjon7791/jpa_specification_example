@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,6 @@ import com.example.jpa_specification_example.model.request.GroupUpdate;
 import com.example.jpa_specification_example.model.request.get_all.GroupGet;
 import com.example.jpa_specification_example.model.response.GroupResponse;
 import com.example.jpa_specification_example.repository.GroupRepository;
-import com.example.jpa_specification_example.specification.BaseSpecification;
 import com.example.jpa_specification_example.specification.GroupSpecification;
 import com.example.jpa_specification_example.utils.Utils;
 
