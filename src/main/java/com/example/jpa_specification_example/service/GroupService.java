@@ -18,6 +18,7 @@ import com.example.jpa_specification_example.model.request.get_all.GroupGet;
 import com.example.jpa_specification_example.model.response.GroupResponse;
 import com.example.jpa_specification_example.repository.GroupRepository;
 import com.example.jpa_specification_example.specification.GroupSpecification;
+import com.example.jpa_specification_example.utils.Utils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,28 +48,16 @@ public class GroupService {
         groupRepository.deleteById(id);
     }
     public Header<?> findAll(GroupGet request){
-        Sort sort=Sort.by(request.getSorts());
-        Specification<Group> specification=Specification.where(null);
-        if(request.rateFrom!=null) {
-            specification=specification.and(GroupSpecification.rateFrom(request.rateFrom));
-        }
-        if(request.rateTo!=null) {
-            specification=specification.and(GroupSpecification.rateTo(request.rateTo));
-        }
-        if(request.from!=null) {
-            specification=specification.and(GroupSpecification.createdAtFrom(request.from));
-        }
-        if(request.to!=null) {
-            specification=specification.and(GroupSpecification.createdAtTo(request.to));
-        }
-        if(request.name!=null) {
-            specification=specification.and(GroupSpecification.nameContains(request.name));
-        }
+        Sort sort=Utils.sortById();
+        
+        Specification<Group> specification=GroupSpecification.createSpecification(request);
+
         if(request.all){
             return Header.ok(groupRepository.findAll(specification, sort).stream()
                     .map(GroupResponse::fromEntity)
                     .collect(Collectors.toList()));
         }
+
         Page<?> page= groupRepository.findAll(specification, request.pageable())
                                         .map(GroupResponse::fromEntity);
         return Header.ok(page.getContent(), PaginationData.of(page));
