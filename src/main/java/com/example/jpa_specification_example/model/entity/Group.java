@@ -41,8 +41,4 @@ public class Group extends BaseEntity{
     public static String _id="id";
 
     public static String _group="group";
-
-    public static String _id="id";
-
-    public static String _group="group";
 }

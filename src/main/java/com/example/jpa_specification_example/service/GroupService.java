@@ -55,7 +55,7 @@ public class GroupService {
         Specification<Group> specification=GroupSpecification.createSpecification(request);
 
         if(request.all){
-            return Header.ok(groupRepository.findAll(baseSpecification, sort).stream()
+            return Header.ok(groupRepository.findAll(specification, sort).stream()
                     .map(GroupResponse::fromEntity)
                     .collect(Collectors.toList()));
         }
