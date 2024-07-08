@@ -46,12 +46,12 @@ public class StudentSpecification{
     }
     private static Specification<Student> fromDate(LocalDate createdAt){
         return (root, query, builder) -> {
-            return builder.greaterThanOrEqualTo(root.get(Student._createdAt), createdAt);
+            return builder.greaterThanOrEqualTo(root.get(Student._createdAt), createdAt.atTime(0, 0));
         };
     }
     private static Specification<Student> toDate(LocalDate createdAt){
         return (root, query, builder) -> {
-            return builder.lessThanOrEqualTo(root.get(Student._createdAt), createdAt);
+            return builder.lessThanOrEqualTo(root.get(Student._createdAt), createdAt.atTime(23, 59));
         };
     }
     private static Specification<Student> fromRate(Integer rate){
