@@ -31,4 +31,11 @@ public class BaseEntity {
     @LastModifiedDate
     @Column(name = "updated_at")
     protected LocalDateTime updatedAt;
+    
+    public static String _rate="rate";
+    public static String _createdAt="createdAt";
+<<<<<<< HEAD
+    public static String _id="id";
+=======
+>>>>>>> 814b1a2d6b0b6fe2ab3088da96c3478b10d9a431
 }
