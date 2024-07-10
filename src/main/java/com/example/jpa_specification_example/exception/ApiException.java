@@ -15,9 +15,4 @@ public class ApiException extends RuntimeException {
         super(message);
         this.responseCode = responseCode;
     }
-
-    public ApiException responseCode(String responseCode){
-        this.responseCode = responseCode;
-        return this;
-    }
 }
